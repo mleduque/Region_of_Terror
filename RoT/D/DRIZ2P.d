@@ -3,6 +3,7 @@ BEGIN ~DRIZ2P~
 IF ~Global("KickedOut","LOCALS",0)~ THEN BEGIN 0
   SAY @0
   IF ~~ THEN REPLY @1 DO ~JoinParty()~ EXIT
+  IF ~~ THEN REPLY @105 GOTO 105
   IF ~!AreaCheck("AR0602")
 !AreaCheck("AR0603")
 !AreaCheck("AR0410")
@@ -104,13 +105,30 @@ END
 IF ~~ THEN BEGIN 1 // from: 0.1
   SAY @3
   IF ~~ THEN DO ~SetGlobal("DrizztKickedOut","GLOBAL",1)
-EscapeArea()~ EXIT
+EscapeAreaMove("AR0406", 1300, 1500, SE)~ EXIT
 END
 
-IF ~Global("KickedOut","LOCALS",0)
+IF ~Global("KickedOut", "LOCALS", 0)
 HappinessLT(Myself,-290)~ THEN BEGIN 2
   SAY @4
   IF ~~ THEN DO ~SetGlobal("DrizztKickedOut","GLOBAL",1)
+SetGlobal("KickedOut", "LOCALS", 1)
 LeaveParty()
-EscapeArea()~ EXIT
+EscapeAreaMove("AR0406", 1300, 1500, SE)~ EXIT
+END
+
+IF ~~ THEN BEGIN 105
+  SAY @106
+  IF ~~ THEN DO ~SetGlobal("DrizztKickedOut","GLOBAL",1)
+SetGlobal("KickedOut", "LOCALS", 1)
+LeaveParty()
+EscapeAreaMove("AR1300", 708, 3200, SE)~ EXIT
+END
+
+IF ~Global("KickedOut", "LOCALS", 1)~ THEN BEGIN 106
+  SAY @107
+  IF ~~ THEN REPLY @108 DO ~SetGlobal("DrizztKickedOut", "GLOBAL", 0)
+    SetGlobal("KickedOut", "LOCALS", 0)
+JoinParty()~ EXIT
+  IF ~~ THEN REPLY @109 EXIT
 END

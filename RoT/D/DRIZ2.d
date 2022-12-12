@@ -170,6 +170,7 @@ IF ~~ THEN BEGIN 47 // from: 46.0
   IF ~~ THEN REPLY @63 GOTO 48
   IF ~~ THEN REPLY @64 GOTO 48
   IF ~~ THEN REPLY @65 GOTO 49
+  IF ~~ THEN REPLY @153 GOTO 49
 END
 
 IF ~~ THEN BEGIN 48 // from: 47.1 47.0
@@ -183,14 +184,13 @@ END
 IF ~~ THEN BEGIN 49 // from: 47.2
   SAY @69
   IF ~~ THEN REPLY @70 GOTO 50
-  IF ~~ THEN REPLY @71 DO ~SetGlobal("Drizztiwdornot","GLOBAL",1)
-SetGlobal("DrizztKickedOut","GLOBAL",1)
-EscapeArea()~ EXIT
+  IF ~~ THEN REPLY @71 GOTO 150
 END
 
 IF ~~ THEN BEGIN 50 // from: 49.0
   SAY @72
   IF ~~ THEN DO ~SetGlobal("Drizztiwdornot","GLOBAL",1)
+SetGlobal("DrizztKickedOut","GLOBAL", 0)
 JoinParty()~ UNSOLVED_JOURNAL @566094 EXIT
 END
 
@@ -210,4 +210,14 @@ IF ~~ THEN BEGIN 53 // from: 52.2 23.2 20.2 11.2 8.2
   SAY @75
   IF ~~ THEN REPLY @76 GOTO 9
   IF ~~ THEN REPLY @77 GOTO 9
+END
+
+IF ~~ THEN BEGIN 150 //from 50
+  SAY @150
+  IF ~~ THEN REPLY @151 DO ~SetGlobal("KickedOut","LOCALS", 1)
+SetGlobal("DrizztKickedOut","GLOBAL", 1)
+EscapeAreaMove("AR0406", 1300, 1500, SE)~ EXIT
+  IF ~~ THEN REPLY @152 DO ~SetGlobal("KickedOut","LOCALS", 1)
+SetGlobal("DrizztKickedOut","GLOBAL", 1)
+EscapeAreaMove("AR0406", 1300, 1500, SE)~ EXIT
 END

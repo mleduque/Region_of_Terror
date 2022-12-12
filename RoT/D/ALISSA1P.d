@@ -121,5 +121,6 @@ IF ~Global("KickedOut","LOCALS",0)
 HappinessLT(Myself,-290)~ THEN BEGIN 3
   SAY @9
   IF ~~ THEN DO ~LeaveParty()
-EscapeArea()~ EXIT
+EscapeAreaMove("AR0406",1320,1680,5)
+SetGlobal("KickedOut","LOCALS",1)~ EXIT
 END
